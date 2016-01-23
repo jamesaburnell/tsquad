@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @account.name %>
+</p>
+
+<p>
+  <strong>Consumer key:</strong>
+  <%= @account.consumer_key %>
+</p>
+
+<p>
+  <strong>Consumer secret:</strong>
+  <%= @account.consumer_secret %>
+</p>
+
+<p>
+  <strong>Access token:</strong>
+  <%= @account.access_token %>
+</p>
+
+<p>
+  <strong>Access token secret:</strong>
+  <%= @account.access_token_secret %>
+</p>
+
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>
