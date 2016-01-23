@@ -10,23 +10,23 @@ class Account < ActiveRecord::Base
 	end
 
 	def send_tweet(text)
-		client = self.twit_client
+		@client = self.twit_client
 		tweet = text.to_s
-		client.update(tweet)
+		@client.update(tweet)
 		return true
 	end
 
 	def twit_fave(search, number, retweet)
-		client = self.twit_client
+		@client = self.twit_client
 		if retweet
 			retweet = " -rt"
 		else !retweet
 			retweet = ""
 		end
-		client.search(search + retweet).take(number).collect do |tweet|
+		@client.search(search + retweet).take(number).collect do |tweet|
 			user = 	tweet.user.screen_name
 			begin
-				client.favorite(tweet)
+				@client.favorite(tweet)
 				puts tweet.text
 				sleep 2
 			rescue => e
@@ -37,10 +37,10 @@ class Account < ActiveRecord::Base
 	end	
 
 	def twit_retweet(search, number)
-		client = self.twit_client
-		client.search(search).take(number).collect do |tweet|
+		@client = self.twit_client
+		@client.search(search).take(number).collect do |tweet|
 			begin
-				client.retweet(tweet)
+				@client.retweet(tweet)
 				sleep 2
 			rescue => e
 				next
@@ -50,8 +50,8 @@ class Account < ActiveRecord::Base
 	end
 
 	def follow_user(search, number)
-		client = self.twit_client
-		client.search(search).take(number).collect do |tweet|
+		@client = self.twit_client
+		@client.search(search).take(number).collect do |tweet|
 			begin
 				client.retweet(tweet)
 				sleep 2
