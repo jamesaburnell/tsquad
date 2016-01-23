@@ -2,28 +2,38 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @account.name %>
+  <% @account.name %>
 </p>
 
 <p>
   <strong>Consumer key:</strong>
-  <%= @account.consumer_key %>
+  <% if @account.consumer_key %>
+    true
+  <% end %>
 </p>
 
 <p>
   <strong>Consumer secret:</strong>
-  <%= @account.consumer_secret %>
+  <% if @account.consumer_secret %>
+      true
+  <% end %>
 </p>
 
 <p>
   <strong>Access token:</strong>
-  <%= @account.access_token %>
+  <% if @account.access_token %>
+      true
+  <% end %>
 </p>
 
 <p>
   <strong>Access token secret:</strong>
-  <%= @account.access_token_secret %>
+  <% if @account.access_token_secret %>
+      true
+  <% end %>
 </p>
+
+<%= link_to 'fave some tweets..', account_favorite_tweet_path(@account) %>
 
 <%= link_to 'Edit', edit_account_path(@account) %> |
 <%= link_to 'Back', accounts_path %>

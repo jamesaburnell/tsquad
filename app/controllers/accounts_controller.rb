@@ -21,6 +21,15 @@ class AccountsController < ApplicationController
   def edit
   end
 
+  def favorite_tweet
+    @account = Account.find(params[:account_id])
+    search = "cats are mean"
+    retweet = 1
+    number = 10
+    @account.tweet_fave(search, number, retweet)
+    redirect_to @account
+  end
+
   # POST /accounts
   # POST /accounts.json
   def create

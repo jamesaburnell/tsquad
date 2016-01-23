@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-	def twit_client
+	def tweet_client
 		@client = Twitter::REST::Client.new do |config|
 		  config.consumer_key        = self.consumer_key
 		  config.consumer_secret     = self.consumer_secret
@@ -10,14 +10,14 @@ class Account < ActiveRecord::Base
 	end
 
 	def send_tweet(text)
-		@client = self.twit_client
+		@client = self.tweet_client
 		tweet = text.to_s
 		@client.update(tweet)
 		return true
 	end
 
-	def twit_fave(search, number, retweet)
-		@client = self.twit_client
+	def tweet_fave(search, number, retweet)
+		@client = self.tweet_client
 		if retweet
 			retweet = " -rt"
 		else !retweet
@@ -36,8 +36,8 @@ class Account < ActiveRecord::Base
 		return true
 	end	
 
-	def twit_retweet(search, number)
-		@client = self.twit_client
+	def tweet_retweet(search, number)
+		@client = self.tweet_client
 		@client.search(search).take(number).collect do |tweet|
 			begin
 				@client.retweet(tweet)
@@ -50,7 +50,7 @@ class Account < ActiveRecord::Base
 	end
 
 	def follow_user(search, number)
-		@client = self.twit_client
+		@client = self.tweet_client
 		@client.search(search).take(number).collect do |tweet|
 			begin
 				client.retweet(tweet)
